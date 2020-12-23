@@ -1686,7 +1686,7 @@ font-weight: normal;
 }
 .about {
      background: #ffff;
-     padding-top: 90px;
+     padding-top: 82px;
 }
 
 .about_text{ width: 100%; float: left;  }
@@ -1887,7 +1887,7 @@ img.zoom {
 }
 form {
      background: #081b30
-     padding: 35px 30px;
+     padding 35px 30px;
 }
 .map_section figure img {
      width: 100%;
