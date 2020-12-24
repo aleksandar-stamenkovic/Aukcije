@@ -4,13 +4,17 @@
 }
 
 .marginii {
-  margin: 90px 0px 90px 0px !important;
+  margin: 70px 0px 70px 0px !important;
 }
 
-.sporrt_text,
-.lorem_text {
+.sporrt_text {
   color: #0006a6 !important;
   font-weight: bold;
+}
+
+.lorem_text {
+  color: #5a00ab !important;
+  font-size: 14pt;
 }
 
 .about {

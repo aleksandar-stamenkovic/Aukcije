@@ -9,7 +9,8 @@
   color: #f5bf0b;
 }
 
-.banner-main {
+.banner-main,
+.clothes_main {
   background-color: #ffffff !important;
 }
 
@@ -25,4 +26,8 @@
 
 .black {
   color: #5a00ab !important;
+}
+
+.page-body {
+  max-width: 1000px;
 }

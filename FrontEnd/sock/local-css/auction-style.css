@@ -1,0 +1,37 @@
+.table-price {
+  color: #f5bf0b;
+  font-weight: bold;
+}
+
+.product-description {
+  padding-top: 20px;
+}
+
+.auction-title {
+  font-size: 30px !important;
+  padding-top: 20px;
+}
+
+.auction-timer {
+  padding-top: 10px;
+  text-align: center;
+  font-weight: bolder;
+  background-color: #f5bf0b;
+}
+
+.auction-controls {
+  text-align: center;
+  background-color: #f5bf0b;
+  padding-bottom: 10px;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #0006a6 !important;
+}
+
+.btn-primary:hover {
+  background-color: #f5bf0b !important;
+  color: #0006a6 !important;
+}

@@ -2252,7 +2252,7 @@ line-height: 30px;
 .btn_main{ 
      width: 100%; 
      float: left;
-     margin-top: 58px;
+     margin-top: 40px;
 }
 
 .Clients{
@@ -2562,7 +2562,7 @@ button.btn.btn-primary,button.btn.btn-primary:hover,button.btn.btn-primary:focus
  }
 
 
-.product {padding-top: 90px;}
+.product {padding-top: 40px;}
 .product .titlepage h2 {color: #136af8;}
 .black {color: #000;}
 .section_Clients .titlepage h2{

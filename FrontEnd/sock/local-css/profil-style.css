@@ -1,8 +1,12 @@
 .input-group {
-    max-width: 50%;
+  max-width: 80%;
 }
 
 .podaci-kontejner {
-    background-color: #136af8;
-    padding-bottom: 20px;
+  background-color: #f5bf0b;
+  padding-bottom: 20px;
+}
+
+.john {
+  background-color: #f5bf0b !important;
 }

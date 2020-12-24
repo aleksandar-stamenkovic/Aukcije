@@ -1,0 +1,23 @@
+.product_pagr {
+  background: #f5bf0b !important;
+}
+
+.price_text {
+  color: #d200e0;
+  font-size: 18pt;
+  font-weight: 400;
+}
+
+.product-name {
+  font-weight: 500;
+  color: #0006a6 !important;
+}
+
+.price-text-last-mod {
+  font-size: 15pt;
+}
+
+.product-image {
+  max-width: 200px;
+  max-height: 200px;
+}
