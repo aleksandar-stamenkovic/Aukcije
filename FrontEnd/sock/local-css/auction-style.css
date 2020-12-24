@@ -19,6 +19,11 @@
   background-color: #f5bf0b;
 }
 
+.last-price {
+  font-weight: bolder;
+  color: #0006a6;
+}
+
 .auction-controls {
   text-align: center;
   background-color: #f5bf0b;
@@ -34,4 +39,23 @@
 .btn-primary:hover {
   background-color: #f5bf0b !important;
   color: #0006a6 !important;
+  border: 1px solid #0006a6;
+}
+
+.price-bid-form {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
+
+.display-field-for-bid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+td,
+th {
+  font-size: 15pt !important;
+  text-align: center;
 }
