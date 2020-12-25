@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace RedisDataLayer
 {
-    public class Aukcija
+    public class Aukcije
     {
         readonly RedisClient redis = new RedisClient("localhost");
 
-        public void Upisi(string key, string value)
+        public string Ucitaj(string key)
         {
-            redis.Set(key, value);
+            return redis.Get<string>(key);
         }
     }
 }

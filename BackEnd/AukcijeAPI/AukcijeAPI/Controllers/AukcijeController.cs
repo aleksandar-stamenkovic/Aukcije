@@ -10,13 +10,16 @@ namespace AukcijeAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class AukcijeController : ControllerBase
     {
         [HttpGet]
-        public void Get()
+        [Route("{key}")]
+        // https://localhost:44371/aukcije/kljuc
+        public string Get(string key)
         {
-            Aukcija aukcija = new Aukcija();
-            aukcija.Upisi("key123", "TEST");
+            Aukcije aukcije = new Aukcije();
+
+            return aukcije.Ucitaj(key);
         }
     }
 }
