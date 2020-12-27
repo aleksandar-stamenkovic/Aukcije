@@ -8,13 +8,8 @@ using RedisDataLayer.Models;
 
 namespace RedisDataLayer
 {
-    public class KorisnikRedis
+    class KorisnikRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
-
-        public void ProcitajKorisnika(string email)
-        {
-            var p = redis.GetHashValues("hash1");
-        }
     }
 }

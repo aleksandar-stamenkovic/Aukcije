@@ -8,7 +8,7 @@ using RedisDataLayer.Models;
 
 namespace RedisDataLayer
 {
-    public class AukcijaRedis
+    class AukcijaRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
     }
