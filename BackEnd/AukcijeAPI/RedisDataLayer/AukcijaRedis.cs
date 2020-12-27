@@ -12,39 +12,78 @@ namespace RedisDataLayer
     {
         readonly RedisClient redis = new RedisClient("localhost");
 
+        //mainHashKey je vreme osnosno glavni kljuc hash tabele koja cuva
+        //objekat jedne aukcije
+
+        private void _Dodaj_UAll_Listi(string id,string mainHashkey)
+        {   
+            redis.SetEntryInHash("AUKCIJE", id, mainHashkey);
+        }
+        private string _Procitaj_IzAll_Liste(string id)
+        {
+            string mainHashKey = redis.GetValueFromHash("AUKCIJE", id);
+            return mainHashKey;
+        }
+
         public void DodajNovogKorisnika(Aukcija a)
         {
-            redis.SetEntryInHash(a.Vreme, "Naziv", a.Naziv);
-            redis.SetEntryInHash(k.Email, "Password", k.Password);
-            redis.SetEntryInHash(k.Email, "Ime", k.Ime);
-            redis.SetEntryInHash(k.Email, "Prezime", k.Prezime);
+            _Dodaj_UAll_Listi(a.ID, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
+
+            string vremeTmp =  a.Vreme.ToString("dd MM yyyy hh:mm:ss");
+            redis.SetEntryInHash(vremeTmp, "ID", a.ID);
+            redis.SetEntryInHash(vremeTmp, "Naziv", a.Naziv);
+            redis.SetEntryInHash(vremeTmp, "Opis", a.Opis);
+            redis.SetEntryInHash(vremeTmp, "Cena", a.Cena.ToString());
+            redis.SetEntryInHash(vremeTmp, "Trajanje", a.Trajanje.ToString());
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 
-        public Korisnik ProcitajKorisnika(string email)
+        public Aukcija ProcitajAukciju(string id)
         {
+            string mainHashKey = _Procitaj_IzAll_Liste(id);
 
-            Dictionary<string, string> dc = redis.GetAllEntriesFromHash(email);
+            Dictionary<string, string> dc = redis.GetAllEntriesFromHash(mainHashKey);
 
-            Korisnik tmp = new Korisnik();
+            Aukcija tmp = new Aukcija();
             string s;
             dc.TryGetValue("ID", out s);
             tmp.ID = s;
-            dc.TryGetValue("Password", out s);
-            tmp.Password = s;
-            dc.TryGetValue("Ime", out s);
-            tmp.Ime = s;
-            dc.TryGetValue("Prezime", out s);
-            tmp.Prezime = s;
+            dc.TryGetValue("Naziv", out s);
+            tmp.Naziv = s;
+            dc.TryGetValue("Opis", out s);
+            tmp.Opis = s;
+            dc.TryGetValue("Cena", out s);
+            tmp.Cena = float.Parse(s);
+            dc.TryGetValue("Trajanej", out s);
+            tmp.Trajanje = int.Parse(s);
 
             return tmp;
         }
 
-        public bool ProveriLogIn(string email, string password)
+        public List<Aukcija> VratiSveAukcije()
         {
-            if (password == redis.GetValueFromHash(email, "password"))
-                return true;
-            return false;
+            Dictionary<string, string> dc = redis.GetAllEntriesFromHash("AUKCIJE");
+            List<Aukcija> lista = new List<Aukcija>();
+
+            foreach(KeyValuePair<string, string> entry in dc)
+            {
+                lista.Add(ProcitajAukciju(entry.Key));
+            }
+
+            return lista;
         }
+
+        public void povecajCenu(float cena, string id)
+        {
+            string mainHashKey = _Procitaj_IzAll_Liste(id);
+            Dictionary<string, string> dc = redis.GetAllEntriesFromHash(mainHashKey);
+
+            float novaCena;
+            string s;
+            dc.TryGetValue("Cena", out s);
+            novaCena = float.Parse(s) + cena;
+            redis.SetEntryInHash(mainHashKey, "Cena", novaCena.ToString());
+        }
+
     }
 }
