@@ -8,7 +8,7 @@ using RedisDataLayer.Models;
 
 namespace RedisDataLayer
 {
-    class KorisnikRedis
+    public class KorisnikRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
 
@@ -39,5 +39,14 @@ namespace RedisDataLayer
 
             return tmp;
         }
+
+        public bool ProveriLogIn(string email, string password)
+        {
+            if(password == redis.GetValueFromHash(email,"password"))
+                return true;
+            return false;
+        }
+
+
     }
 }
