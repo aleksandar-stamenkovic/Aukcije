@@ -14,10 +14,10 @@ namespace RedisDataLayer
 
         public void DodajNovogKorisnika(Aukcija a)
         {
-            redis.SetEntryInHash(a.Vreme, "Naziv", a.Naziv);
+            /*redis.SetEntryInHash(a.Vreme, "Naziv", a.Naziv);
             redis.SetEntryInHash(k.Email, "Password", k.Password);
             redis.SetEntryInHash(k.Email, "Ime", k.Ime);
-            redis.SetEntryInHash(k.Email, "Prezime", k.Prezime);
+            redis.SetEntryInHash(k.Email, "Prezime", k.Prezime);*/
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 

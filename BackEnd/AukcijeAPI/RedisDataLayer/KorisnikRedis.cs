@@ -42,11 +42,9 @@ namespace RedisDataLayer
 
         public bool ProveriLogIn(string email, string password)
         {
-            if(password == redis.GetValueFromHash(email,"password"))
+            if(password == redis.GetValueFromHash(email,"Password"))
                 return true;
             return false;
         }
-
-
     }
 }

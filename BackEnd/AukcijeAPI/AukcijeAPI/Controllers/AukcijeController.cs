@@ -24,7 +24,7 @@ namespace AukcijeAPI.Controllers
 
             //k.Email = "pera";
 
-            aukcije.DodajNovogKorisnika();
+            //aukcije.DodajNovogKorisnika();
 
             return "asdasd";// aukcije.Ucitaj(key);
         }
