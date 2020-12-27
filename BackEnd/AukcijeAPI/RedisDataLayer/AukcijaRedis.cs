@@ -25,7 +25,7 @@ namespace RedisDataLayer
             return mainHashKey;
         }
 
-        public void DodajNovogKorisnika(Aukcija a)
+        public void DodajNovuAukciju(Aukcija a)
         {
             _Dodaj_UAll_Listi(a.ID, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
 

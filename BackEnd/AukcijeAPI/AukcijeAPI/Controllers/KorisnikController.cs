@@ -21,13 +21,13 @@ namespace AukcijeAPI.Controllers
             return korisnik;
         }
 
-        [HttpPost("{email}")]
-        public ActionResult<Korisnik> PostKorisnik(Korisnik korisnik, string email)
+        [HttpPost/*("{email}")*/]
+        public ActionResult<Korisnik> PostKorisnik(Korisnik korisnik)
         {
             KorisnikRedis redis = new KorisnikRedis();
             redis.DodajNovogKorisnika(korisnik);
 
-            return CreatedAtAction("PostKorisnik", new { id = email }, korisnik);
+            return Ok();
         }
 
         [HttpPost]
