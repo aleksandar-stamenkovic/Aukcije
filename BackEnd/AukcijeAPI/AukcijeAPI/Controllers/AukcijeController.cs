@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RedisDataLayer.Models;
 
 namespace AukcijeAPI.Controllers
 {
@@ -19,7 +20,13 @@ namespace AukcijeAPI.Controllers
         {
             Aukcije aukcije = new Aukcije();
 
-            return aukcije.Ucitaj(key);
+            //Korisnik k =new Korisnik();
+
+            //k.Email = "pera";
+
+            aukcije.DodajNovogKorisnika();
+
+            return "asdasd";// aukcije.Ucitaj(key);
         }
     }
 }
