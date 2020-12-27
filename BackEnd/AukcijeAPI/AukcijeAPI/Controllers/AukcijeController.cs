@@ -23,7 +23,7 @@ namespace AukcijeAPI.Controllers
             //Korisnik k =new Korisnik();
 
             //k.Email = "pera";
-
+            aukcije.Ucitaj("asdasd");
             aukcije.DodajNovogKorisnika();
 
             return "asdasd";// aukcije.Ucitaj(key);

@@ -15,6 +15,7 @@ namespace RedisDataLayer
         Korisnik ksa;
         public string Ucitaj(string key)
         {
+            var p = redis.GetHashValues("hash1");
             return redis.Get<string>(key);
         }
 
