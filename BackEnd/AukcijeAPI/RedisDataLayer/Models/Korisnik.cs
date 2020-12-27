@@ -14,5 +14,6 @@ namespace RedisDataLayer.Models
         public string Ime { get; set; }
         public string Prezime { get; set; }
 
+        List<Aukcija> MojeAukcije { get; set; }
     }
 }
