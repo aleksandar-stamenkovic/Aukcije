@@ -43,9 +43,31 @@ namespace AukcijeAPI.Controllers
         public ActionResult PutPovecajCenu(string id, int cena)
         {
             AukcijaRedis redis = new AukcijaRedis();
-            redis.povecajCenu(cena, id);
+            redis.PovecajCenu(cena, id);
 
             return Ok();
+        }
+
+
+        //OBRISATI
+        //test funkcija ne radi
+        [HttpGet("testRead")]
+        public string test()
+        {
+            AukcijaRedis redis = new AukcijaRedis();
+            string tmp = redis.test();
+
+            return tmp;
+        }
+
+        //OBRISATI
+        //test funkcija ne radi
+        [HttpGet("testSub")]
+        public string test2(string name)
+        {
+            AukcijaRedis redis = new AukcijaRedis();
+            redis.test2();
+            return null;
         }
     }
 }

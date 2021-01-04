@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AukcijaRedis.cs" />
-    <Compile Include="Aukcije.cs" />
+    <Compile Include="TestAukcije.cs" />
     <Compile Include="KorisnikRedis.cs" />
     <Compile Include="Models\Aukcija.cs" />
     <Compile Include="Models\Korisnik.cs" />

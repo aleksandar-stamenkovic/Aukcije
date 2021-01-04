@@ -15,6 +15,7 @@ namespace RedisDataLayer.Models
         public string Opis { get; set; }
         public float Cena { get; set; }
         public int Trajanje { get; set; }
-        public List<Korisnik> Bideri { get; set; }
+        public string Vlasnik { get; set; }
+        public List<string> Bideri { get; set; }
     }
 }

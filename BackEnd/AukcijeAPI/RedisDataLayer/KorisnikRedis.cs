@@ -42,6 +42,15 @@ namespace RedisDataLayer
             dc.TryGetValue("Prezime", out s);
             tmp.Prezime = s;
 
+            List<string> list = redis.GetRangeFromList(email + ":MOJEAUKCIJE", 0, -1);
+            List<Aukcija> listaAukcija = new List<Aukcija>();
+            foreach (string el in list)
+            {
+                listaAukcija.Add(_ar.ProcitajAukciju(el));
+            }
+
+            tmp.MojeAukcije = listaAukcija;
+
             return tmp;
         }
 

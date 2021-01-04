@@ -9,7 +9,7 @@ using RedisDataLayer.Models;
 
 namespace RedisDataLayer
 {
-    public class Aukcije
+    public class TestAukcije
     {
         readonly RedisClient redis = new RedisClient("localhost");
         public string Ucitaj(string key)

@@ -11,6 +11,7 @@ namespace RedisDataLayer
     public class AukcijaRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
+        KorisnikRedis _kr;
 
         //mainHashKey je vreme osnosno glavni kljuc hash tabele koja cuva
         //objekat jedne aukcije
@@ -35,6 +36,9 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Opis", a.Opis);
             redis.SetEntryInHash(vremeTmp, "Cena", a.Cena.ToString());
             redis.SetEntryInHash(vremeTmp, "Trajanje", a.Trajanje.ToString());
+            redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
+            redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
+
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 
@@ -46,6 +50,9 @@ namespace RedisDataLayer
 
             Aukcija tmp = new Aukcija();
             string s;
+            DateTime tmpTime = DateTime.Parse(mainHashKey);
+            tmp.Vreme = tmpTime;
+
             dc.TryGetValue("ID", out s);
             tmp.ID = s;
             dc.TryGetValue("Naziv", out s);
@@ -54,8 +61,14 @@ namespace RedisDataLayer
             tmp.Opis = s;
             dc.TryGetValue("Cena", out s);
             tmp.Cena = float.Parse(s);
-            dc.TryGetValue("Trajanej", out s);
+            dc.TryGetValue("Trajanje", out s);
             tmp.Trajanje = int.Parse(s);
+            dc.TryGetValue("Vlasnik", out s);
+            tmp.Vlasnik = s;
+
+            List<string> list = redis.GetRangeFromList(mainHashKey + ":BIDERI", 0, -1);
+
+            tmp.Bideri = list;
 
             return tmp;
         }
@@ -73,7 +86,7 @@ namespace RedisDataLayer
             return lista;
         }
 
-        public void povecajCenu(float cena, string id)
+        public void PovecajCenu(float cena, string id)
         {
             string mainHashKey = _Procitaj_IzAll_Liste(id);
             Dictionary<string, string> dc = redis.GetAllEntriesFromHash(mainHashKey);
@@ -85,5 +98,60 @@ namespace RedisDataLayer
             redis.SetEntryInHash(mainHashKey, "Cena", novaCena.ToString());
         }
 
+        public void DodajBidera(string id, string email, string ime, string prezime, float cena)
+        {                   //id aukcije//
+            string mainHashKey = _Procitaj_IzAll_Liste(id);
+            string listElem = email + " " + ime + " " + prezime + " " + cena;
+
+            redis.PushItemToList(mainHashKey + ":BIDERI", listElem);
+        }
+
+        public void ObrisiAukciju(string id)
+        {
+            /* -> pronadji u glavni hash (AUKCIJE)
+             * -> obrisi aukciju
+             * -> obrisi listu bidera
+             * -> obrisi entri u glavnom hashu (AUKCIJE)
+             */
+            string mainHashKey = _Procitaj_IzAll_Liste(id);
+            string vlasnikEmail = redis.GetValueFromHash(mainHashKey, "Vlasnik");
+            _kr.ObrisiAukcijuKorisnika(id, vlasnikEmail);
+            redis.DeleteById<string>(mainHashKey);
+            redis.DeleteById<string>(mainHashKey + "BIDERI");
+            redis.RemoveEntryFromHash("AUKCIJE", id);
+        }
+
+
+        //OBRISATI
+        //test funkcija ne radi
+        public string test()
+        {
+            var x = redis.ReceiveMessages();
+            return "" + x;
+        }
+
+        //OBRISATI
+        //test funkcija ne radi
+        public void test2()
+        {
+            redis.Subscribe("test");
+            return;
+        }
     }
 }
+
+/*
+ * frontend funcija koja refreshuje cene svih aukcija na strani na kojoj su izlistane sve aukcije
+ * backend proverava da li je doslo do promene cene i kad god se cena promeni pozove
+ * callback na frontendu koji refreshuje sve cene
+ * (sve ovo iznad se moze implementirati bez koriscenja PUB/SUB Redis mehanizma
+ * 
+ * Ukoliko zelimo da upotrebimo negde PUB/SUB Redis mehanizam
+ * 
+ * PRVA VARIJANTA
+ * Moze se dodati mogucnost gde se korisnik moze automatski subscribe-ovati na aukciju na kojoj
+ * je licitirao i time se omoguci da se korisnik obavesti svaki put kad se promeni cena
+ * 
+ * DRUGA VARIJANTA
+ * 
+ */
