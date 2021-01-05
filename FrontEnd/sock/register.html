@@ -103,7 +103,7 @@
          <div class="row align-items-center">
             <div class="col-md-6">
                <div class="email_btn">
-                  <form action="/action_page.php">
+                  <form>
                      <div class="form-group">
                         <input type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
                      </div>
@@ -118,24 +118,24 @@
             </div>
             <div class="col-md-6">
                <div class="email_btn">
-                  <form action="/action_page.php">
+                  <form>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Ime" name="Ime">
+                        <input id = "ime" type="text" class="form-control form-control-sm" placeholder="Ime" name="Ime">
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Prezime" name="Prezime">
+                        <input id = "prezime" type="text" class="form-control form-control-sm" placeholder="Prezime" name="Prezime">
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
+                        <input id = "email" type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
+                        <input id = "password" type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="form-group">
                         <input type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="submit_btn">
-                        <button type="submit" class="btn btn-primary" style="background: #081b30;">Registruj se</button>
+                        <button type="submit" class="btn btn-primary" style="background: #081b30;" onclick="registrujSe()">Registruj se</button>
                      </div>
                   </form>
                </div>
@@ -157,7 +157,7 @@
    <!-- end Contact Us-->
    <!-- footer start-->
    
-
+   <script src="Korisnik.js" type="module"></script>
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/popper.min.js"></script>
