@@ -118,7 +118,6 @@
             </div>
             <div class="col-md-6">
                <div class="email_btn">
-                  <form>
                      <div class="form-group">
                         <input id = "ime" type="text" class="form-control form-control-sm" placeholder="Ime" name="Ime">
                      </div>
@@ -135,9 +134,8 @@
                         <input type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="submit_btn">
-                        <button type="submit" class="btn btn-primary" style="background: #081b30;" onclick="registrujSe()">Registruj se</button>
+                        <button id="dugme" type="submit" class="btn btn-primary" style="background: #081b30;" onclick="registrujSe()">Registruj se</button>
                      </div>
-                  </form>
                </div>
             </div>
          </div>
@@ -157,36 +155,9 @@
    <!-- end Contact Us-->
    <!-- footer start-->
    
-   <script src="Korisnik.js" type="module"></script>
+   <script src="main.js"></script>
    <!-- Javascript files-->
-   <script src="js/jquery.min.js"></script>
-   <script src="js/popper.min.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-   <script src="js/jquery-3.0.0.min.js"></script>
-   <script src="js/plugin.js"></script>
-   <!-- sidebar -->
-   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="js/custom.js"></script>
-   <!-- javascript -->
-   <script src="js/owl.carousel.js"></script>
-   <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-   <script>
-      $(document).ready(function () {
-         $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-         });
-
-         $(".zoom").hover(function () {
-
-            $(this).addClass('transition');
-         }, function () {
-
-            $(this).removeClass('transition');
-         });
-      });
-
-   </script>
+   
 
 
 </body>

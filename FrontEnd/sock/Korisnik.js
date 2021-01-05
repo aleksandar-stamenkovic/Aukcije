@@ -27,4 +27,8 @@ export class Korisnik {
             }
         });
     }
+
+    stampaj() {
+        console.log("TEST");
+    }
 }
