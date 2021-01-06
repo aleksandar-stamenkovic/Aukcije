@@ -48,7 +48,29 @@ namespace AukcijeAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("{id}/{email}/{ime}/{prezime}/{cena}")]
+        public ActionResult DodajBidera(string id, string email, string ime, string prezime, float cena)
+        {                             //id aukcije, email korinika, ime korisnika, prezime korisnika 
+            AukcijaRedis redis = new AukcijaRedis();
+            redis.DodajBidera(id, email, ime, prezime, cena);
 
+            return Ok();
+        }
+
+        [HttpDelete("obrisiAukciju/{id}")]
+        public ActionResult ObrisiAukciju(string id)
+        {
+            AukcijaRedis redis = new AukcijaRedis();
+            redis.ObrisiAukciju(id);
+
+            return Ok();
+        }
+
+    }
+}
+
+
+/*
         //OBRISATI
         //test funkcija ne radi
         [HttpGet("testRead")]
@@ -69,5 +91,4 @@ namespace AukcijeAPI.Controllers
             redis.test2();
             return null;
         }
-    }
-}
+*/

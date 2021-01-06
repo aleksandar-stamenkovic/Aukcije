@@ -39,5 +39,14 @@ namespace AukcijeAPI.Controllers
 
             return uspesno;
         }
+
+        [HttpGet]
+        [Route("korisnik-aukcije")]
+        public ActionResult<List<Aukcija>> GetAukcije(string email)
+        {
+            KorisnikRedis redis = new KorisnikRedis();
+            List<Aukcija> sveAukcije = redis.ProcitajSveAukcijeKorisnika(email);
+            return sveAukcije;
+        }
     }
 }

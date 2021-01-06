@@ -64,11 +64,11 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li> <a href="index.html">Home</a> </li>
-                                 <li> <a href="about.html">About</a> </li>
+                                 <!--<li> <a href="about.html">About</a> </li>-->
                                  <li><a href="profile.html">Profile</a></li>
                                  <li><a href="shop.html">Shop</a></li>
-                                 <li><a href="register.html">#[register]</a></li>
-                                 <li class="last"><a href="#"><img src="images/search_icon.png" alt="icon" /></a></li>
+                                 <!--<li><a href="register.html">#[register]</a></li>-->
+                                 <!--<li><a style="color: #f5bf0b;  cursor: pointer;" onclick="IzlogujSe() ">Odjavi se</a></li>-->
                               </ul>
                            </nav>
                         </div>
@@ -90,8 +90,7 @@
                <div class="titlepage">
                   <h2 style="text-align: center; margin-top: 45px;"><strong class="black">Pridruzite nam se</strong>
                   </h2>
-                  <span style="text-align: center;">available, but the majority have suffered alteration in some form,
-                     by injected randomised words which don't look even slightly believable</span>
+                  <span style="text-align: center;">Ukoliko imate nalog molimo da se ulogujete, a ukoliko ne posedujete nalog neophodno je registrovati se.</span>
                </div>
             </div>
          </div>
@@ -103,17 +102,15 @@
          <div class="row align-items-center">
             <div class="col-md-6">
                <div class="email_btn">
-                  <form>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
+                        <input id="login-email" type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
+                        <input id="login-password" type="password" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="submit_btn">
-                        <button type="submit" class="btn btn-primary" style="background: #081b30;">Uloguj se</button>
+                        <button id="dugmeLogin" type="submit" class="btn btn-primary" style="background: #081b30;" onclick="LogujSe()">Uloguj se</button>
                      </div>
-                  </form>
                </div>
             </div>
             <div class="col-md-6">
@@ -128,10 +125,10 @@
                         <input id = "email" type="text" class="form-control form-control-sm" placeholder="Email" name="Email">
                      </div>
                      <div class="form-group">
-                        <input id = "password" type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
+                        <input id = "password" type="password" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="form-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Password" name="Password">
+                        <input type="password" class="form-control form-control-sm" placeholder="Password" name="Password">
                      </div>
                      <div class="submit_btn">
                         <button id="dugme" type="submit" class="btn btn-primary" style="background: #081b30;" onclick="registrujSe()">Registruj se</button>

@@ -39,6 +39,7 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
 
+            _kr.DodajAukcijuKorisniku(a.ID, a.Vlasnik);
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 
@@ -108,10 +109,11 @@ namespace RedisDataLayer
 
         public void ObrisiAukciju(string id)
         {
-            /* -> pronadji u glavni hash (AUKCIJE)
-             * -> obrisi aukciju
-             * -> obrisi listu bidera
-             * -> obrisi entri u glavnom hashu (AUKCIJE)
+            /* -> pronadji u glavni hash (AUKCIJE) i nacu kljuc aukcije
+             * -> obrisi aukciju na osnovu kljuca
+             * -> obrisi aukciju u listi aukcija korisnika
+             * -> obrisi listu bidera na osnovu kljuca i sufiksa "BIDERI"
+             * -> obrisi entry u glavnom hashu (AUKCIJE)
              */
             string mainHashKey = _Procitaj_IzAll_Liste(id);
             string vlasnikEmail = redis.GetValueFromHash(mainHashKey, "Vlasnik");
@@ -121,22 +123,6 @@ namespace RedisDataLayer
             redis.RemoveEntryFromHash("AUKCIJE", id);
         }
 
-
-        //OBRISATI
-        //test funkcija ne radi
-        public string test()
-        {
-            var x = redis.ReceiveMessages();
-            return "" + x;
-        }
-
-        //OBRISATI
-        //test funkcija ne radi
-        public void test2()
-        {
-            redis.Subscribe("test");
-            return;
-        }
     }
 }
 
@@ -152,6 +138,25 @@ namespace RedisDataLayer
  * Moze se dodati mogucnost gde se korisnik moze automatski subscribe-ovati na aukciju na kojoj
  * je licitirao i time se omoguci da se korisnik obavesti svaki put kad se promeni cena
  * 
- * DRUGA VARIJANTA
+ * DRUGA VARIJANTA..
  * 
  */
+
+
+/*
+        //OBRISATI
+        //test funkcija ne radi
+        public string test()
+        {
+            var x = redis.ReceiveMessages();
+            return "" + x;
+        }
+
+        //OBRISATI
+        //test funkcija ne radi
+        public void test2()
+        {
+            redis.Subscribe("test");
+            return;
+        }
+*/
