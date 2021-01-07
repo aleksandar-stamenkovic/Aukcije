@@ -26,12 +26,19 @@ namespace RedisDataLayer
             return mainHashKey;
         }
 
+        private string _Generisi_Id()
+        {
+            long idCounter = redis.Incr("AUKCIJA_ID_BROJAC");
+            int tmp = (int)idCounter;
+            return tmp.ToString();
+        }
+
         public void DodajNovuAukciju(Aukcija a)
         {
             _Dodaj_UAll_Listi(a.ID, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
 
             string vremeTmp =  a.Vreme.ToString("dd MM yyyy hh:mm:ss");
-            redis.SetEntryInHash(vremeTmp, "ID", a.ID);
+            redis.SetEntryInHash(vremeTmp, "ID", _Generisi_Id());
             redis.SetEntryInHash(vremeTmp, "Naziv", a.Naziv);
             redis.SetEntryInHash(vremeTmp, "Opis", a.Opis);
             redis.SetEntryInHash(vremeTmp, "Cena", a.Cena.ToString());
