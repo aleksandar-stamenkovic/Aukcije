@@ -36,11 +36,11 @@ namespace ImageUploadAPI.Controllers
                     {
                         Directory.CreateDirectory(_environment.WebRootPath + "\\Upload\\");
                     }
-                    using (FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\Upload\\" + id/* + ".jpg"*/))
+                    using (FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\Upload\\" + id + ".jpg"))
                     {
                         objFile.files.CopyTo(fileStream);
                         fileStream.Flush();
-                        return "\\Upload\\" + id/* + ".jpg"*/;
+                        return "\\Upload\\" + id + ".jpg";
                     }
                 }
                 else
