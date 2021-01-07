@@ -12,9 +12,5 @@
     <ProjectReference Include="..\RedisDataLayer\RedisDataLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 
 </Project>
