@@ -11,7 +11,7 @@ namespace RedisDataLayer
     public class KorisnikRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
-        AukcijaRedis _ar;
+        AukcijaRedis _ar = new AukcijaRedis();
 
         //objekat _ar jer objekat tipa koji se koristi kako bi
         //korisnik mogao da pristupa funkcijama klase AukcijaRedis
