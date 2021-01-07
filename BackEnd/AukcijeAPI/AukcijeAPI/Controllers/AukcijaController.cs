@@ -25,6 +25,8 @@ namespace AukcijeAPI.Controllers
         public ActionResult<Aukcija> PostAukcija(Aukcija aukcija)
         {
             AukcijaRedis redis = new AukcijaRedis();
+            aukcija.Vreme = DateTime.Now;
+            aukcija.Trajanje *= 60;
             redis.DodajNovuAukciju(aukcija);
 
             return Ok();
