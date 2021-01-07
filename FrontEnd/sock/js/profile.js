@@ -27,10 +27,33 @@ function showData() {
 
 showData();
 
-/*
-frm-cnt-id
-frm-cnt-ime
-frm-cnt-prezime
-frm-cnt-email
-frm-cnt-pass
-*/
+function DodajAukciju() {
+  let nizKontrola = document.querySelectorAll(".frm-cnt-auction");
+  let naziv = nizKontrola[0].value;
+  let opis = nizKontrola[1].value;
+  var cena = parseInt(nizKontrola[2].value);
+  var trajanje = parseInt(nizKontrola[3].value);
+
+  a = JSON.parse(localStorage.getItem("loged-in"));
+  let email = a.email;
+
+  console.log(trajanje);
+  console.log(a.email);
+  fetch("https://localhost:44371/aukcija", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      naziv: naziv,
+      opis: opis,
+      cena: cena,
+      trajanje: trajanje,
+      vlasnik: email,
+    }),
+  }).then((p) => {
+    if (p.ok) {
+      console.log("USPESNO DODATA AUKCIJA");
+    }
+  });
+}

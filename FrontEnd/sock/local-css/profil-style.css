@@ -10,3 +10,14 @@
 .john {
   background-color: #f5bf0b !important;
 }
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #0006a6 !important;
+}
+
+.btn-primary:hover {
+  background-color: #0006a6 !important;
+  color: #f5bf0b;
+}

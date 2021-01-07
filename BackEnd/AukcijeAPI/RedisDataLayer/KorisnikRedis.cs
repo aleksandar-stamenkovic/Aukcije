@@ -11,7 +11,12 @@ namespace RedisDataLayer
     public class KorisnikRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
-        AukcijaRedis _ar;
+        //AukcijaRedis _ar;// = new AukcijaRedis();
+        
+        public KorisnikRedis()
+        {
+
+        }
 
         //objekat _ar jer objekat tipa koji se koristi kako bi
         //korisnik mogao da pristupa funkcijama klase AukcijaRedis
@@ -46,7 +51,7 @@ namespace RedisDataLayer
             List<Aukcija> listaAukcija = new List<Aukcija>();
             foreach (string el in list)
             {
-                listaAukcija.Add(_ar.ProcitajAukciju(el));
+                listaAukcija.Add(AukcijaRedis._ar.ProcitajAukciju(el));
             }
 
             tmp.MojeAukcije = listaAukcija;
@@ -72,7 +77,7 @@ namespace RedisDataLayer
             List<Aukcija> listaAukcija = new List<Aukcija>();
             foreach(string el in list)
             {
-                listaAukcija.Add(_ar.ProcitajAukciju(el));
+                listaAukcija.Add(AukcijaRedis._ar.ProcitajAukciju(el));
             }
             return listaAukcija;
         }
