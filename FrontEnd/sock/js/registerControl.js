@@ -55,6 +55,36 @@ function LogujSe() {
       console.log(a.loged);
       console.log("USPESNO");
       window.location.href = "shop.html";
+
+      checkUser();
     }
   });
+}
+
+function checkUser() {
+  a = JSON.parse(localStorage.getItem("loged-in"));
+  let email = a.email;
+
+  fetch("https://localhost:44371/korisnik/" + email, {
+    method: "GET",
+  }).then((p) =>
+    p.json().then((data) => {
+      let nizPodataka = [
+        data["id"],
+        data["ime"],
+        data["prezime"],
+        data["email"],
+        data["password"],
+      ];
+
+      console.log("prossssssssssss");
+      localStorage.setItem(
+        "loged-in-info",
+        JSON.stringify({
+          ime: nizPodataka[1],
+          prezime: nizPodataka[2],
+        })
+      );
+    })
+  );
 }

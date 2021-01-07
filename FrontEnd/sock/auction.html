@@ -103,51 +103,29 @@
                   <div class="row">
                      <div class="col-sm-12">
                             <div class="auction-controls">
-                                <h3 class="auction-timer">1 day, 16:55:49</h3>                            
+                                <h3 class="auction-timer">0 : 0 : 0 : 0</h3>                            
                             
-                                <h3 class="last-price">Last price: 250$</h3>
+                                <h3 class="last-price">Last price: <br><strong class="last-price-value">
+                                 000</strong></h3>
                                 <div class="input-field-for-bid">
                                     
-                                    <input type="text" class="price-bid-form form-control form-control-sm" placeholder="you're price" name="price">
+                                    <input type="number" class="price-bid-form form-control form-control-sm" placeholder="you're price" name="price">
                                     <p></p>
-                                    <a class="btn btn-lg btn-primary" href="#" role="button">Place Bid</a>
+                                    <a class="btn btn-lg btn-primary" href="#" role="button" onclick="povecajCenu()">Place Bid</a>
                                  </div>
                             </div>
 
                             <table class="table table-sm table-hover">
                                 <thead>
                                     <tr>
-                                      <th scope="col">Name</th>
-                                      <th scope="col">ID</th>
-                                      <th scope="col">Bids</th>
+                                      <th scope="col">email</th>
+                                      <th scope="col">Ime</th>
+                                      <th scope="col">Prezime</th>
+                                      <th scope="col">Cena</th>
                                     </tr>
                                   </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>Mark</td>
-                                      <td>#1256</td>
-                                      <td class="table-price">250$</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Jacob</td>
-                                      <td>#5644</td>
-                                      <td class="table-price">230$</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Alex</td>
-                                        <td>#8492</td>
-                                        <td class="table-price">180$</td>
-                                      </tr>
-                                      <tr>
-                                        <td>Alex</td>
-                                        <td>#8492</td>
-                                        <td class="table-price">180$</td>
-                                      </tr>
-                                      <tr>
-                                        <td>Alex</td>
-                                        <td>#8492</td>
-                                        <td class="table-price">180$</td>
-                                      </tr>
+                                  <tbody id="table-body-data">
+                                   
                                   </tbody>
                               </table>                       
                      
@@ -158,7 +136,8 @@
                 </div>
             </div>
       <!-- end Our  Clients -->
-
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="./js/auction.js"></script>
       <!-- footer start-->
       <div class="copyright_text">
         <div id="plant" class="footer layout_padding">

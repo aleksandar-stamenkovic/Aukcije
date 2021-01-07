@@ -59,3 +59,8 @@ th {
   font-size: 15pt !important;
   text-align: center;
 }
+
+.last-price-value {
+  color: #5a00ab;
+  font-size: larger;
+}

@@ -122,6 +122,14 @@ namespace RedisDataLayer
             redis.PushItemToList(mainHashKey + ":BIDERI", listElem);
         }
 
+        public List<string> ProcitajBidere(string id)
+        {
+            string mainHashKey = _Procitaj_IzAll_Liste(id);
+            List<string> lista = redis.GetRangeFromList(mainHashKey + ":BIDERI", 0, -1);
+
+            return lista;
+        }
+
         public void ObrisiAukciju(string id)
         {
             /* -> pronadji u glavni hash (AUKCIJE) i nacu kljuc aukcije

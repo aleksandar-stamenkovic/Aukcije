@@ -42,7 +42,7 @@ namespace AukcijeAPI.Controllers
         }
 
         [HttpPut("{id}/{cena}")]
-        public ActionResult PutPovecajCenu(string id, int cena)
+        public ActionResult PutPovecajCenu(string id, float cena)
         {
             AukcijaRedis redis = new AukcijaRedis();
             redis.PovecajCenu(cena, id);
@@ -57,6 +57,15 @@ namespace AukcijeAPI.Controllers
             redis.DodajBidera(id, email, ime, prezime, cena);
 
             return Ok();
+        }
+
+        [HttpGet("svibideri/{id}")]
+        public ActionResult<List<string>> ProcitajBidere(string id)
+        {
+            AukcijaRedis redis = new AukcijaRedis();
+            List<string> lista = redis.ProcitajBidere(id);
+            lista.Reverse();
+            return lista;
         }
 
         [HttpDelete("obrisiAukciju/{id}")]
