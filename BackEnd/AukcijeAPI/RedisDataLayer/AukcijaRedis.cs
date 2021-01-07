@@ -11,7 +11,7 @@ namespace RedisDataLayer
     public class AukcijaRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
-        KorisnikRedis _kr;
+        KorisnikRedis _kr = new KorisnikRedis();
 
         //mainHashKey je vreme osnosno glavni kljuc hash tabele koja cuva
         //objekat jedne aukcije
@@ -47,7 +47,7 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
 
-            _kr.DodajAukcijuKorisniku(a.ID, a.Vlasnik);
+            _kr.DodajAukcijuKorisniku(id, a.Vlasnik);
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 
