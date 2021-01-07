@@ -21,20 +21,3 @@
   max-width: 200px;
   max-height: 200px;
 }
-
-.dodaj-aukciju {
-  position: absolute;
-  right: 10%;
-}
-
-.btn-primary,
-.btn-primary:active,
-.btn-primary:visited {
-  background-color: #0006a6 !important;
-}
-
-.btn-primary:hover {
-  background-color: #f5bf0b !important;
-  color: #0006a6 !important;
-  border: 1px solid #0006a6;
-}

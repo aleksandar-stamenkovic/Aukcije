@@ -11,7 +11,7 @@ namespace RedisDataLayer
     public class AukcijaRedis
     {
         readonly RedisClient redis = new RedisClient("localhost");
-        KorisnikRedis _kr = new KorisnikRedis();
+        KorisnikRedis _kr;
 
         //mainHashKey je vreme osnosno glavni kljuc hash tabele koja cuva
         //objekat jedne aukcije
@@ -26,20 +26,12 @@ namespace RedisDataLayer
             return mainHashKey;
         }
 
-        private string _Generisi_Id()
-        {
-            long idCounter = redis.Incr("AUKCIJA_ID_BROJAC");
-            int tmp = (int)idCounter;
-            return tmp.ToString();
-        }
-
         public void DodajNovuAukciju(Aukcija a)
         {
-            string id = _Generisi_Id();
-            _Dodaj_UAll_Listi(id, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
+            _Dodaj_UAll_Listi(a.ID, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
 
             string vremeTmp =  a.Vreme.ToString("dd MM yyyy hh:mm:ss");
-            redis.SetEntryInHash(vremeTmp, "ID", id);
+            redis.SetEntryInHash(vremeTmp, "ID", a.ID);
             redis.SetEntryInHash(vremeTmp, "Naziv", a.Naziv);
             redis.SetEntryInHash(vremeTmp, "Opis", a.Opis);
             redis.SetEntryInHash(vremeTmp, "Cena", a.Cena.ToString());
@@ -47,7 +39,7 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
 
-            _kr.DodajAukcijuKorisniku(id, a.Vlasnik);
+            _kr.DodajAukcijuKorisniku(a.ID, a.Vlasnik);
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 
