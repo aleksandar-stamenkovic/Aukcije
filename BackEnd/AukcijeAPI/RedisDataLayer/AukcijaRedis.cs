@@ -35,10 +35,11 @@ namespace RedisDataLayer
 
         public void DodajNovuAukciju(Aukcija a)
         {
-            _Dodaj_UAll_Listi(a.ID, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
+            string id = _Generisi_Id();
+            _Dodaj_UAll_Listi(id, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
 
             string vremeTmp =  a.Vreme.ToString("dd MM yyyy hh:mm:ss");
-            redis.SetEntryInHash(vremeTmp, "ID", _Generisi_Id());
+            redis.SetEntryInHash(vremeTmp, "ID", id);
             redis.SetEntryInHash(vremeTmp, "Naziv", a.Naziv);
             redis.SetEntryInHash(vremeTmp, "Opis", a.Opis);
             redis.SetEntryInHash(vremeTmp, "Cena", a.Cena.ToString());
