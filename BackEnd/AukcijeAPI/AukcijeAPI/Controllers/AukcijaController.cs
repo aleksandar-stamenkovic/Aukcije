@@ -75,6 +75,14 @@ namespace AukcijeAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("tester")]
+        public ActionResult<string> test(string id)
+        {
+            AukcijaRedis redis = new AukcijaRedis();
+            redis.proveriExpireAukcija();
+            return "proso";
+        }
+
     }
 }
 

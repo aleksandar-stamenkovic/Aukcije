@@ -33,7 +33,7 @@ namespace AukcijeAPI
         private static void SetTimer()
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(5000);
+            aTimer = new System.Timers.Timer(60000);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
@@ -42,8 +42,8 @@ namespace AukcijeAPI
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            TestAukcije ta = new TestAukcije();
-            ta.Ucitaj();
+            AukcijaRedis ar = new AukcijaRedis();
+            ar.proveriExpireAukcija();
         }
     }
 }

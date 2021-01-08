@@ -23,6 +23,9 @@ function registrujSe() {
         "loged-in",
         JSON.stringify({ email: email, loged: true })
       );
+
+      checkUser();
+
       console.log("USPESNO");
       a = JSON.parse(localStorage.getItem("loged-in"));
       console.log(a.loged);
@@ -51,8 +54,9 @@ function LogujSe() {
         "loged-in",
         JSON.stringify({ email: email, loged: true })
       );
+
       a = JSON.parse(localStorage.getItem("loged-in"));
-      console.log(a.loged);
+      console.log(a.email);
       console.log("USPESNO");
       window.location.href = "shop.html";
 
@@ -77,14 +81,16 @@ function checkUser() {
         data["password"],
       ];
 
-      console.log("prossssssssssss");
+      let ime = nizPodataka[1];
+      let prezime = nizPodataka[2];
+      console.log(ime + " " + prezime);
       localStorage.setItem(
         "loged-in-info",
-        JSON.stringify({
-          ime: nizPodataka[1],
-          prezime: nizPodataka[2],
-        })
+        JSON.stringify({ ime: ime, prezime: prezime })
       );
+      b = JSON.parse(localStorage.getItem("loged-in-info"));
+      console.log(b.ime);
+      console.log(b.prezime);
     })
   );
 }

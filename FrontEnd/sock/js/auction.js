@@ -129,12 +129,14 @@ function postaviAukciju() {
       let cena = nizPodataka[3];
       let trajanje = nizPodataka[4];
 
-      document.querySelector(".auction-timer").innerHTML = trajanje + "min";
+      document.querySelector(".auction-timer").innerHTML =
+        "Time Remaining: " + trajanje + "min";
       document.querySelector(".last-price-value").innerHTML = cena;
       document.querySelector(".product-description").innerHTML = opis;
       document.querySelector(".auction-title").innerHTML = naziv;
 
-      document.querySelector(".rounded").src = "https://localhost:44371/imageupload/"+ id +".jpg";
+      document.querySelector(".rounded").src =
+        "https://localhost:44371/imageupload/" + id + ".jpg";
     })
   );
 }

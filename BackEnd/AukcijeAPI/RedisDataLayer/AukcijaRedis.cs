@@ -40,6 +40,19 @@ namespace RedisDataLayer
             return tmp.ToString();
         }
 
+        private void _dodajUListuFlegova(string element)
+        {
+            redis.PushItemToList("FLEGOVIAUKCIJA", element);
+        }
+
+        private void _dodajFleg(string id, int expireTime)
+        {
+            byte[] array = Encoding.ASCII.GetBytes(id);
+            redis.SetEx(id + "FLEG", expireTime, array);
+
+            _dodajUListuFlegova(id + "FLEG");
+        }
+
         public string DodajNovuAukciju(Aukcija a)
         {
             string idAukcije = _Generisi_Id();
@@ -53,6 +66,8 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Trajanje", a.Trajanje.ToString());
             redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
+
+            _dodajFleg(idAukcije, a.Trajanje);
 
             _kr.DodajAukcijuKorisniku(idAukcije, a.Vlasnik);
 
@@ -79,8 +94,11 @@ namespace RedisDataLayer
             tmp.Opis = s;
             dc.TryGetValue("Cena", out s);
             tmp.Cena = float.Parse(s);
-            dc.TryGetValue("Trajanje", out s);
-            tmp.Trajanje = int.Parse(s);
+
+            //dc.TryGetValue("Trajanje", out s);
+            //tmp.Trajanje = int.Parse(s);
+            tmp.Trajanje = (int)redis.Ttl(id + "FLEG") / 60;
+
             dc.TryGetValue("Vlasnik", out s);
             tmp.Vlasnik = s;
 
@@ -132,6 +150,8 @@ namespace RedisDataLayer
             return lista;
         }
 
+        
+
         public void ObrisiAukciju(string id)
         {
             /* -> pronadji u glavni hash (AUKCIJE) i nacu kljuc aukcije
@@ -141,11 +161,30 @@ namespace RedisDataLayer
              * -> obrisi entry u glavnom hashu (AUKCIJE)
              */
             string mainHashKey = _Procitaj_IzAll_Liste(id);
+            if (mainHashKey == null)
+                return;
             string vlasnikEmail = redis.GetValueFromHash(mainHashKey, "Vlasnik");
             _kr.ObrisiAukcijuKorisnika(id, vlasnikEmail);
-            redis.DeleteById<string>(mainHashKey);
-            redis.DeleteById<string>(mainHashKey + "BIDERI");
+            redis.Del(mainHashKey);
+            redis.Del(mainHashKey + ":BIDERI");
             redis.RemoveEntryFromHash("AUKCIJE", id);
+        }
+
+
+        public void proveriExpireAukcija()
+        {
+            List<string> listaPostojecih = redis.GetAllItemsFromList("FLEGOVIAUKCIJA");
+
+            foreach(string s in listaPostojecih)
+            {
+                if(redis.Ttl(s) < 0)
+                {
+                    byte[] idbytes = Encoding.ASCII.GetBytes(s);
+                    redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
+                        string[] parsed = s.Split('F');
+                    ObrisiAukciju(parsed[0]);
+                }
+            }
         }
 
     }
