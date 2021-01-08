@@ -12,9 +12,9 @@ namespace RedisDataLayer
     public class TestAukcije
     {
         readonly RedisClient redis = new RedisClient("localhost");
-        public string Ucitaj(string key)
+        public void Ucitaj()
         {
-            return redis.Get<string>(key);
+            redis.Incr("tester");
         }
 
 
