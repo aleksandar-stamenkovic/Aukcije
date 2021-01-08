@@ -1,3 +1,4 @@
+using AukcijeAPI.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,13 +27,16 @@ namespace AukcijeAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSignalR();
             services.AddCors(options =>
             {
                 options.AddPolicy("CORS", builder =>
                 {
                     builder.AllowAnyHeader()
                            .AllowAnyMethod()
-                           .AllowAnyOrigin();
+                           .WithOrigins("http://127.0.0.1:5501",
+                                        "http://127.0.0.1:5500")
+                           .AllowCredentials();
                 });
             });
         }
@@ -56,6 +60,7 @@ namespace AukcijeAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<AukcijaHub>("/aukcijahub");
             });
         }
     }

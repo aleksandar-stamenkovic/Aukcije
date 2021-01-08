@@ -1,3 +1,6 @@
+
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44371/aukcijahub").build();
+
 function dodajBidera(id, email, ime, prezime, cena) {
   var c = cena;
   fetch(
@@ -52,6 +55,7 @@ function povecajCenu() {
       dodajBideraMaster();
       postaviAukciju();
       procitajBidere();
+      connection.invoke("SendMessage");
     } else {
       console.log("greska prilikom get zahteva");
     }
@@ -144,3 +148,25 @@ function postaviAukciju() {
 postaviAukciju();
 //dodajBideraMaster();
 //dodajBidera("1", "pera.pera@gmail.com", "Petar", "Petrovic", 5);
+
+console.log("asdasdasdasasdas");
+
+/**********SIGNAL R**********/
+
+// Funkcija koju trigeruje server
+connection.on("ReceiveMessage", function () {
+  console.log("TRIGEROVAO");
+  postaviAukciju();
+  procitajBidere();
+});
+
+connection.start().then(function () {
+  // izvrsava se kad se uspostavi konekcija sa serverom
+
+});
+
+function clickkk()
+{
+  connection.invoke("SendMessage");
+  console.log("111111111111111111");
+}
