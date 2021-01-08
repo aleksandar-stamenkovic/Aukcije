@@ -40,17 +40,34 @@ namespace RedisDataLayer
             return tmp.ToString();
         }
 
-        private void _dodajUListuFlegova(string element)
+        private void _DodajUListuFlegova(string element)
         {
             redis.PushItemToList("FLEGOVIAUKCIJA", element);
         }
 
-        private void _dodajFleg(string id, int expireTime)
+        private void _DodajFleg(string id, int expireTime)
         {
             byte[] array = Encoding.ASCII.GetBytes(id);
             redis.SetEx(id + "FLEG", expireTime, array);
 
-            _dodajUListuFlegova(id + "FLEG");
+            _DodajUListuFlegova(id + "FLEG");
+        }
+
+        private void _DodajUListuPobednika(string idA)
+        {
+            string mainHashKey = _Procitaj_IzAll_Liste(idA);
+
+            string aData = redis.GetValueFromHash(mainHashKey, "Naziv");
+            List<string> list = redis.GetRangeFromList(mainHashKey + ":BIDERI", -1, -1);
+            string biderData = list[0];
+
+            string element = "POBEDNIK:" + biderData + "- Aukcija:" + idA + " - " + aData;
+            redis.PushItemToList("POBEDNICI", element);
+        }
+
+        public List<string> ProcitajListuPobednika()
+        {
+            return redis.GetRangeFromList("POBEDNICI", 0, -1);
         }
 
         public string DodajNovuAukciju(Aukcija a)
@@ -67,7 +84,7 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Vlasnik", a.Vlasnik);
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
 
-            _dodajFleg(idAukcije, a.Trajanje);
+            _DodajFleg(idAukcije, a.Trajanje);
 
             _kr.DodajAukcijuKorisniku(idAukcije, a.Vlasnik);
 
@@ -154,12 +171,15 @@ namespace RedisDataLayer
 
         public void ObrisiAukciju(string id)
         {
-            /* -> pronadji u glavni hash (AUKCIJE) i nacu kljuc aukcije
+            /* -> prvo se doda pobednik aukcije u listu pobednika "POBEDNICI"
+             * -> pronadji u glavni hash (AUKCIJE) i nacu kljuc aukcije
              * -> obrisi aukciju na osnovu kljuca
              * -> obrisi aukciju u listi aukcija korisnika
              * -> obrisi listu bidera na osnovu kljuca i sufiksa "BIDERI"
              * -> obrisi entry u glavnom hashu (AUKCIJE)
              */
+            _DodajUListuPobednika(id);
+
             string mainHashKey = _Procitaj_IzAll_Liste(id);
             if (mainHashKey == null)
                 return;
@@ -171,7 +191,7 @@ namespace RedisDataLayer
         }
 
 
-        public void proveriExpireAukcija()
+        public void ProveriExpireAukcija()
         {
             List<string> listaPostojecih = redis.GetAllItemsFromList("FLEGOVIAUKCIJA");
 
@@ -182,6 +202,7 @@ namespace RedisDataLayer
                     byte[] idbytes = Encoding.ASCII.GetBytes(s);
                     redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
                         string[] parsed = s.Split('F');
+                    _DodajUListuPobednika(parsed[0]);
                     ObrisiAukciju(parsed[0]);
                 }
             }

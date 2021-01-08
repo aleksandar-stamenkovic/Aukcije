@@ -17,7 +17,7 @@ namespace AukcijeAPI
 
         public static void Main(string[] args)
         {
-            //SetTimer();
+            SetTimer();
 
             CreateHostBuilder(args).Build().Run();
         }
@@ -43,7 +43,7 @@ namespace AukcijeAPI
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             AukcijaRedis ar = new AukcijaRedis();
-            ar.proveriExpireAukcija();
+            ar.ProveriExpireAukcija();
         }
     }
 }
