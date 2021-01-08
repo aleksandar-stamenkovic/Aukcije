@@ -34,7 +34,7 @@ function generisiAukciju(id, imgSrc, naziv, cena, opis) {
       id +
       "</label>" +
       '<div class="sport_product">' +
-      '<figure><img class="product-image" src="images/t-shirt.png" alt="img"/ ></figure>' +
+      '<figure><img class="product-image" src=https://localhost:44371/imageupload/' + id + '.jpg alt="img"/ ></figure>' +
       '<p class="price-text-last-mod"> Last price:<strong class="price_text">' +
       cena +
       "</strong></p>" +

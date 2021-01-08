@@ -40,7 +40,7 @@ namespace RedisDataLayer
             return tmp.ToString();
         }
 
-        public void DodajNovuAukciju(Aukcija a)
+        public string DodajNovuAukciju(Aukcija a)
         {
             string idAukcije = _Generisi_Id();
             _Dodaj_UAll_Listi(idAukcije, a.Vreme.ToString("dd MM yyyy hh:mm:ss"));
@@ -55,6 +55,8 @@ namespace RedisDataLayer
             redis.SetEntryInHash(vremeTmp, "Bideri", vremeTmp + ":BIDERI");
 
             _kr.DodajAukcijuKorisniku(idAukcije, a.Vlasnik);
+
+            return idAukcije;
             //public void SetRangeInHash(string hashId, IEnumerable<KeyValuePair<string, string>> keyValuePairs);
         }
 

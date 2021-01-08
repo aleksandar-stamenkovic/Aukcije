@@ -133,6 +133,8 @@ function postaviAukciju() {
       document.querySelector(".last-price-value").innerHTML = cena;
       document.querySelector(".product-description").innerHTML = opis;
       document.querySelector(".auction-title").innerHTML = naziv;
+
+      document.querySelector(".rounded").src = "https://localhost:44371/imageupload/"+ id +".jpg";
     })
   );
 }

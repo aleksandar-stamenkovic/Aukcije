@@ -22,14 +22,12 @@ namespace AukcijeAPI.Controllers
         }
 
         [HttpPost/*("{email}")*/]
-        public ActionResult<Aukcija> PostAukcija(Aukcija aukcija)
+        public ActionResult<string> PostAukcija(Aukcija aukcija)
         {
             AukcijaRedis redis = new AukcijaRedis();
             aukcija.Vreme = DateTime.Now;
             aukcija.Trajanje *= 60;
-            redis.DodajNovuAukciju(aukcija);
-
-            return Ok();
+            return redis.DodajNovuAukciju(aukcija);
         }
 
         [HttpGet("sveaukcije")]
