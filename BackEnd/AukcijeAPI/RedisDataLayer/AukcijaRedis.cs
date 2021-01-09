@@ -202,7 +202,7 @@ namespace RedisDataLayer
                     byte[] idbytes = Encoding.ASCII.GetBytes(s);
                     redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
                         string[] parsed = s.Split('F');
-                    _DodajUListuPobednika(parsed[0]);
+                    //_DodajUListuPobednika(parsed[0]);
                     ObrisiAukciju(parsed[0]);
                 }
             }

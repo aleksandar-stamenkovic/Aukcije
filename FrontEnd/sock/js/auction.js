@@ -1,5 +1,6 @@
-
-var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44371/aukcijahub").build();
+var connection = new signalR.HubConnectionBuilder()
+  .withUrl("https://localhost:44371/aukcijahub")
+  .build();
 
 function dodajBidera(id, email, ime, prezime, cena) {
   var c = cena;
@@ -39,8 +40,11 @@ function dodajBideraMaster() {
 
   let data = sessionStorage.getItem("auctionId");
 
+  let postojecaCena = document.querySelector(".last-price-value").innerHTML;
   console.log(data);
-  dodajBidera(data, a.email, b.ime, b.prezime, cena);
+  const glavnaCena = parseFloat(postojecaCena) + parseFloat(cena);
+  console.log(glavnaCena);
+  dodajBidera(data, a.email, b.ime, b.prezime, parseInt(glavnaCena));
 }
 
 function povecajCenu() {
@@ -162,11 +166,9 @@ connection.on("ReceiveMessage", function () {
 
 connection.start().then(function () {
   // izvrsava se kad se uspostavi konekcija sa serverom
-
 });
 
-function clickkk()
-{
+function clickkk() {
   connection.invoke("SendMessage");
   console.log("111111111111111111");
 }
