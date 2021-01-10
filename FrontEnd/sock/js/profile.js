@@ -54,33 +54,34 @@ function DodajAukciju() {
   }).then((p) => {
     if (p.ok) {
       // data je server response u kojoj se nalazi id novokreirane aukcije
-      p.json().then(data => {
+      p.json().then((data) => {
         uploadujSliku(data);
-      })
+      });
       console.log("USPESNO DODATA AUKCIJA");
+      alert("Aukcija uspesno dodata");
     }
   });
 }
 
 function uploadujSliku(id) {
-	var file_data = $('#file').prop('files')[0];
-	var form_data = new FormData();
-	form_data.append('files', file_data); //<-- OVO MORA OVAKO (nece bez 'files')
-	$.ajax({
-		url: 'https://localhost:44371/ImageUpload/' + id, // point to server-side controller method
-		dataType: 'text', // what to expect back from the server
-		cache: false,
-		contentType: false,
-		processData: false,
-		data: form_data,
-		type: 'post',
-		success: function(response) {
+  var file_data = $("#file").prop("files")[0];
+  var form_data = new FormData();
+  form_data.append("files", file_data); //<-- OVO MORA OVAKO (nece bez 'files')
+  $.ajax({
+    url: "https://localhost:44371/ImageUpload/" + id, // point to server-side controller method
+    dataType: "text", // what to expect back from the server
+    cache: false,
+    contentType: false,
+    processData: false,
+    data: form_data,
+    type: "post",
+    success: function (response) {
       //$('#msg').html(response); // display success response from the server
       console.log("Uploadovana slika");
-		},
-		error: function(response) {
+    },
+    error: function (response) {
       //$('#msg').html(response); // display error response from the server
       console.log("Greska Uploadovana slika");
-		}
-	});
+    },
+  });
 }

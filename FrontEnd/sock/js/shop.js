@@ -19,7 +19,7 @@ function LoadAukcije() {
         let trajanje = nizPodataka[4];
 
         console.log(id);
-        generisiAukciju(id, id + ".png", naziv, cena, opis);
+        generisiAukciju(id, id + ".png", naziv, trajanje, opis);
       });
     })
   );
@@ -27,17 +27,19 @@ function LoadAukcije() {
 
 LoadAukcije();
 
-function generisiAukciju(id, imgSrc, naziv, cena, opis) {
+function generisiAukciju(id, imgSrc, naziv, trajanje, opis) {
   var tester = $(
     '<div class="shopItem col-xl-4 col-lg-4 col-md-6 col-sm-12 " onclick="predji(this)" >' +
       '<label class="myId" hidden>' +
       id +
       "</label>" +
       '<div class="sport_product">' +
-      '<figure><img class="product-image" src=https://localhost:44371/imageupload/' + id + '.jpg alt="img"/ ></figure>' +
-      '<p class="price-text-last-mod"> Last price:<strong class="price_text">' +
-      cena +
-      "</strong></p>" +
+      '<figure><img class="product-image" src=https://localhost:44371/imageupload/' +
+      id +
+      '.jpg alt="img"/ ></figure>' +
+      '<p class="price-text-last-mod"> Preostalo: <strong class="price_text">' +
+      trajanje +
+      "</strong> min</p>" +
       '<h6 class="product-name">' +
       opis +
       "</h6>" +

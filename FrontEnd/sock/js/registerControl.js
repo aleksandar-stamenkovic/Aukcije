@@ -24,12 +24,11 @@ function registrujSe() {
         JSON.stringify({ email: email, loged: true })
       );
 
-      checkUser();
-
       console.log("USPESNO");
       a = JSON.parse(localStorage.getItem("loged-in"));
       console.log(a.loged);
-      window.location.href = "shop.html";
+
+      checkUser();
     }
   });
 }
@@ -58,7 +57,6 @@ function LogujSe() {
       a = JSON.parse(localStorage.getItem("loged-in"));
       console.log(a.email);
       console.log("USPESNO");
-      window.location.href = "shop.html";
 
       checkUser();
     }
@@ -91,6 +89,7 @@ function checkUser() {
       b = JSON.parse(localStorage.getItem("loged-in-info"));
       console.log(b.ime);
       console.log(b.prezime);
+      window.location.href = "shop.html";
     })
   );
 }

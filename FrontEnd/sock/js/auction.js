@@ -59,6 +59,7 @@ function povecajCenu() {
       dodajBideraMaster();
       postaviAukciju();
       procitajBidere();
+
       connection.invoke("SendMessage");
     } else {
       console.log("greska prilikom get zahteva");
@@ -138,13 +139,16 @@ function postaviAukciju() {
       let trajanje = nizPodataka[4];
 
       document.querySelector(".auction-timer").innerHTML =
-        "Time Remaining: " + trajanje + "min";
+        "Preostalo vreme: " + trajanje + " min";
+
       document.querySelector(".last-price-value").innerHTML = cena;
       document.querySelector(".product-description").innerHTML = opis;
       document.querySelector(".auction-title").innerHTML = naziv;
 
       document.querySelector(".rounded").src =
         "https://localhost:44371/imageupload/" + id + ".jpg";
+
+      pokreniTImer();
     })
   );
 }
@@ -168,7 +172,28 @@ connection.start().then(function () {
   // izvrsava se kad se uspostavi konekcija sa serverom
 });
 
-function clickkk() {
-  connection.invoke("SendMessage");
-  console.log("111111111111111111");
+//
+//
+//
+//
+//timer za promenu cene
+
+var myTimer;
+
+function pokreniTImer() {
+  myTimer = window.setInterval(function () {
+    timerCounter();
+  }, 1000);
+}
+
+function timerCounter() {
+  let tekst = document.querySelector(".auction-timer").innerHTML;
+  var paragraphs = tekst.split(" ");
+  let currTime = parseInt(paragraphs[2]);
+
+  if (currTime == 0) {
+    document.querySelector(".auction-timer").innerHTML =
+      "Preostalo vreme: (< 1 min) manje od jednog minuta";
+  }
+  console.log(currTime);
 }

@@ -87,7 +87,7 @@ namespace AukcijeAPI.Controllers
         {
             AukcijaRedis redis = new AukcijaRedis();
             //redis.ProveriExpireAukcija();
-            //redis.ObrisiAukciju(id);
+            redis.ObrisiAukciju(id);
             return "proso";
         }
 

@@ -59,10 +59,18 @@ namespace RedisDataLayer
 
             string aData = redis.GetValueFromHash(mainHashKey, "Naziv");
             List<string> list = redis.GetRangeFromList(mainHashKey + ":BIDERI", -1, -1);
-            string biderData = list[0];
+            if (list.Count > 0)
+            {
+                string biderData = list[0];
 
-            string element = "POBEDNIK:" + biderData + "- Aukcija:" + idA + " - " + aData;
-            redis.PushItemToList("POBEDNICI", element);
+                string element = "POBEDNIK:" + biderData + "- Aukcija:" + idA + " - " + aData;
+                redis.PushItemToList("POBEDNICI", element);
+            }
+            else
+            {
+                string element = "NEMA POBEDNIKA" + "- Aukcija:" + idA + " - " + aData;
+                redis.PushItemToList("POBEDNICI", element);
+            }
         }
 
         public List<string> ProcitajListuPobednika()
@@ -200,10 +208,11 @@ namespace RedisDataLayer
                 if(redis.Ttl(s) < 0)
                 {
                     byte[] idbytes = Encoding.ASCII.GetBytes(s);
-                    redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
+                    //redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
                         string[] parsed = s.Split('F');
                     //_DodajUListuPobednika(parsed[0]);
                     ObrisiAukciju(parsed[0]);
+                    redis.LRem("FLEGOVIAUKCIJA", 0, idbytes);
                 }
             }
         }
