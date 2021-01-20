@@ -63,3 +63,20 @@ function predji(host) {
   console.log(data);
   window.location.href = "auction.html";
 }
+
+function procitajPobednike() {
+  fetch("https://localhost:44371/aukcija/pobednici", {
+    method: "GET",
+  }).then((p) =>
+    p.json().then((data) => {
+      data.forEach((element) => {
+        let text = element;
+
+        var item = $('<h4 class="line-text-pobednici">' + text + "</h5>");
+        $(".pobednici-aukcija-text").append(item);
+      });
+    })
+  );
+}
+
+procitajPobednike();

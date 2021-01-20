@@ -26,3 +26,9 @@
   border-radius: 20px;
   border: 1px solid #0006a6;
 }
+
+.line-text-pobednici {
+  text-align: center;
+  color: #d200e0;
+  font-weight: bold;
+}

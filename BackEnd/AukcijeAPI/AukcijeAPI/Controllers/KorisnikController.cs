@@ -41,7 +41,7 @@ namespace AukcijeAPI.Controllers
         }
 
         [HttpGet]
-        [Route("korisnik-aukcije")]
+        [Route("korisnik-aukcije/{email}")]
         public ActionResult<List<Aukcija>> GetAukcije(string email)
         {
             KorisnikRedis redis = new KorisnikRedis();
