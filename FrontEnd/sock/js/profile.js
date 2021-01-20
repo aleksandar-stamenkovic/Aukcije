@@ -23,6 +23,7 @@ function showData() {
       kontrole[4].value = nizPodataka[4];
     })
   );
+  preumiMojeAukcije();
 }
 
 showData();
@@ -130,8 +131,6 @@ function preumiMojeAukcije() {
   );
   console.log("asdaas");
 }
-
-preumiMojeAukcije();
 
 /*
       let nizPodataka = [

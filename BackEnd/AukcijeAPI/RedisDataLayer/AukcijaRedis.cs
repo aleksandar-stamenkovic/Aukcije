@@ -108,7 +108,8 @@ namespace RedisDataLayer
 
             Aukcija tmp = new Aukcija();
             string s;
-            DateTime tmpTime = DateTime.Parse(mainHashKey);
+            //DateTime tmpTime = DateTime.Parse(mainHashKey);
+            DateTime tmpTime = DateTime.ParseExact(mainHashKey, "dd MM yyyy hh:mm:ss", null);
             tmp.Vreme = tmpTime;
 
             dc.TryGetValue("ID", out s);
