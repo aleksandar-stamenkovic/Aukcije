@@ -65,7 +65,7 @@
                               <ul class="menu-area-main">
                                  <li> <a href="index.html">Početna</a> </li>
                                  <!--<li> <a href="about.html">About</a> </li>-->
-                                 <li><a href="profile.html">Dodaj Aukciju</a></li>
+                                 <li><a href="profile.html">Dodaj Aukciju & Info</a></li>
                                  <li><a href="shop.html">Aukcije</a></li>
                                  <!--<li><a href="register.html">#[register]</a></li>-->
                                  <li><a style="color: #f5bf0b;  cursor: pointer;" onclick="IzlogujSe() ">Odjavi se</a></li>
@@ -91,7 +91,12 @@
                <div class="col-md-12 ">
                   <div class="titlepage">
                      <h2><strong class="black"> Aktivne aukcije </strong>  </h2>
-                     <span>Sve aukcije koje su trenutno aktivne i na kojima mozete licitirati. <br>Zadnja ponudjena cena koja u trenutnku isteka aukcije je pobednicka ponuda </span>
+                     <!--<span>Sve aukcije koje su trenutno aktivne i na kojima mozete licitirati. <br>Zadnja ponudjena cena koja u trenutnku isteka aukcije je pobednicka ponuda </span>-->
+                     <h4 style="text-align: center; color: black; font-weight: bold;">POBEDNICI AUKCIJE format prikaza:Email Ime Prezime pobednika i poslenja Cena (kojom je pobedio), ID, Naziv aukcije</h4>
+                     <div class="pobednici-aukcija-text" style=" overflow:scroll; height:150px;">
+         
+              
+                     </div>
                   </div>
                </div>
             </div>
@@ -115,11 +120,8 @@
       <script src="./js/shop.js"></script>
      <!-- footer start-->
      <div style="position: fixed; bottom: 0px;" class="copyright_text">
-      <h4 style="text-align: center; color: black; font-weight: bold;">POBEDNICI AUKCIJE format prikaza:Email Ime Prezime pobednika i poslenja Cena (kojom je pobedio), ID, Naziv aukcije</h4>
-      <div class="pobednici-aukcija-text" style=" overflow:scroll; height:150px;">
-         
-              
-      </div>
+      
+
       <div id="plant" class="footer layout_padding">
          <div class="container">
             <p>© 2020 Designed by Aleksandar Stamenković and Milan Stanković</p>

@@ -136,7 +136,7 @@ function postaviAukciju() {
       let naziv = nizPodataka[1];
       let opis = nizPodataka[2];
       let cena = nizPodataka[3];
-      let trajanje = nizPodataka[4];
+      let trajanje = parseInt(nizPodataka[4]) + 1;
 
       document.querySelector(".auction-timer").innerHTML =
         "Preostalo vreme: " + trajanje + " min";

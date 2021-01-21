@@ -30,6 +30,8 @@ namespace ImageUploadAPI.Controllers
         {
             try
             {
+                if (objFile.files == null)
+                    return "failed";
                 if (objFile.files.Length > 0)
                 {
                     if (!Directory.Exists(_environment.WebRootPath + "\\Upload\\"))

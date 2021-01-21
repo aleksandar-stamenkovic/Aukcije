@@ -105,6 +105,10 @@ namespace RedisDataLayer
             string mainHashKey = _Procitaj_IzAll_Liste(id);
 
             Dictionary<string, string> dc = redis.GetAllEntriesFromHash(mainHashKey);
+            /*Dictionary<string, string> dc;
+            if (redis.GetAllEntriesFromHash(mainHashKey) != null)
+                dc = redis.GetAllEntriesFromHash(mainHashKey);
+            else return null;*/
 
             Aukcija tmp = new Aukcija();
             string s;

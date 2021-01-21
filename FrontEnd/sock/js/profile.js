@@ -23,7 +23,7 @@ function showData() {
       kontrole[4].value = nizPodataka[4];
     })
   );
-  preumiMojeAukcije();
+  //preumiMojeAukcije();
 }
 
 showData();
@@ -90,9 +90,9 @@ function uploadujSliku(id) {
 function preumiMojeAukcije() {
   a = JSON.parse(localStorage.getItem("loged-in"));
   let email = a.email;
-
+  $(".moje-auckije-info").empty();
   console.log(email);
-  fetch("https://localhost:44371/korisnik/korisnik-aukcije/pera@gmail.com", {
+  fetch("https://localhost:44371/korisnik/korisnik-aukcije/" + email, {
     method: "GET",
   }).then((p) =>
     p.json().then((data) => {
@@ -107,20 +107,21 @@ function preumiMojeAukcije() {
         console.log(element);
 
         var item = $(
-          '<h5 style="color:black;">Naziv' +
+          '<h5 style="color:black; font-weight: bold;">Naziv: ' +
             naziv +
             "</h5>" +
-            '<h6 style="color:black;">Opis' +
+            '<h6 style="color:black; font-weight: bold;">Opis: ' +
             opis +
             "</h6>" +
-            '<h6 style="color:black;">Vreme kreiranja' +
+            '<h6 style="color:black; font-weight: bold;">Vreme kreiranja: ' +
             vreme +
             "</h6>" +
-            '<h6 style="color:black;">Cena' +
+            '<h6 style="color:black; font-weight: bold;">Cena: ' +
             cena +
             "</h6>" +
             "<p></p>"
         );
+
         $(".moje-auckije-info").append(item);
 
         //moje-auckije-info
